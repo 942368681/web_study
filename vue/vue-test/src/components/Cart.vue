@@ -56,7 +56,7 @@ export default {
       } else {
         this.cart.push({ ...good, count: 1, active: true });
       }
-      this.$emit("addCart");
+      this.$emit("add", 111);
     }
   },
   computed: {

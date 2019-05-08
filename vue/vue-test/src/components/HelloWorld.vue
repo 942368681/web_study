@@ -19,7 +19,7 @@
     </ul>
 
     <!-- 购物车 -->
-    <cart title="abc" ref="cart" @addCart="onAddCart"></cart>
+    <Cart title="abc" ref="cart" @add="onAddCart"></Cart>
   </div>
 </template>
 
@@ -60,11 +60,11 @@ export default {
     },
     addCart(good) {
       // 添加购物车
-      this.$refs.cart.addCart(good)
+      this.$refs.cart.addCart(good);
       // this.$bus.$emit('addCart', good);
     },
-    onAddCart(){
-      console.log('lalal');
+    onAddCart(val){
+      console.log(val);
       
     }
   },
