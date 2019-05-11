@@ -4,9 +4,10 @@
       <router-link to="/">Home</router-link>|
       <router-link to="/about">About</router-link>|
       <router-link to="/login" v-if="!isLogin">Login</router-link>
-      <span>{{loginState}}</span>
+      <span>{{loginState}} {{val}}</span>
     </div>
 
+    <!-- kstore测试 -->
     <div>{{count}}
       <button @click="onAdd">add</button>
     </div>
@@ -29,7 +30,7 @@ import store from './kstore';
 export default {
   computed: {
     ...mapState(["isLogin"]),
-    ...mapGetters(["loginState"]),
+    ...mapGetters(["loginState", "val"]),
     count(){
       return store.state.count;
     }

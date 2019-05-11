@@ -25,6 +25,7 @@ class KRouter {
     options.routes.forEach(item => {
       this.routeMap[item.path] = item.component;
     });
+    console.log(this.routeMap);
   }
 
   // 注册组件

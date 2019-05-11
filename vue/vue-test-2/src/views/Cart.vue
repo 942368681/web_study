@@ -24,12 +24,21 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 export default {
     computed: {
         ...mapState({
             cart: state => state.cart.list
         })
+    },
+    methods: {
+        ...mapActions({
+          test1: "test"
+        }),
+    },
+    mounted () {
+      console.log(this.cart)
+      this.test1();
     }
 };
 </script>

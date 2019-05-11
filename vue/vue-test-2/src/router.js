@@ -35,6 +35,7 @@ const router = new Router({
       beforeEnter(to,from,next) {
         // 判断是否登录
         if (!store.state.isLogin) {
+          console.log('to login page!!!!!!!')
           next('/login?redirect='+to.path);
         } else {
           next();

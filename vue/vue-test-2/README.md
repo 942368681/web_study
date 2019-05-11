@@ -1,41 +1,9 @@
 # vue全家桶及原理剖析
 
-# vue-test
+## vuex原理
 
-## Project setup
-```
-npm install
-```
+vuex内部接管了store中state的所有状态，原理是vuex内部初始化了一个vue实例，把传进来的store中的state交给了vue中的state接管，相当于利用了vue框架本身的数据响应式机制，同时把mutations，actions都当作属性存了下来，同时定义了dispatch，commit等方法，这样外部就可以通过store实例调用dispatch，commit方法，commit方法在内部可以拿到初始化store时传进来的mutation对象中的某个方法，把state传入这个方法就可以执行state的更改。dispatch方法内部可以拿到初始化store时传进来的actions对象中的某个方法，然后把commit等方法扔给这个方法，任他调用，最终更改状态。
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## vue-router原理
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Run your end-to-end tests
-```
-npm run test:e2e
-```
-
-### Run your unit tests
-```
-npm run test:unit
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+在Vue实例中注册了基础组件 如 <router-link>, <router-view>, vue-router中也同样引入了一个vue的实例，利用data管理路径，当hashchange或者history change的时候，改变data中current值（current就是路径串），内部还定义了一个routeMap对象，初始化执行了一个createRouteMap方法，该方法接收的参数就是我们定义的路由数组结构，然后整理成了key: value形式的对象赋值给了routeMap，所以初始化后的routeMap对象内部就是一组组key为路径，value为该路径应该挂载的组件的键值对。然后在初始化<router-view>组件的时候，render方法挂载了data中的current路径的组件（var component = _this.routeMap[_this.app.current]），所以当data中的current更改，<router-view>就能挂载不同组件。
