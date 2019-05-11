@@ -9,7 +9,7 @@ KFormItem（中间层，label，包裹KInput）：对单个表单（子组件）
 KInput（最里层，基础input单元）：实现input双向绑定，通知父组件进行单个表单校验；
 
 
-## <k-input>组件做两件事
+##  \<k-input\>组件做两件事
 1. 实现与组件调用层的data中的model的数据双向绑定；
 2. 通知父组件（FormItem）进行校验；
 
