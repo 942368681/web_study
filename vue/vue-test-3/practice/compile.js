@@ -60,10 +60,12 @@ class Compile {
             const attrName = attr.name;
             const exp = attr.value;
             if (this.isDirective(attrName)) {
+                // 对于指令的处理
                 const dir = attrName.substring(2);
                 this[dir] && this[dir](node, this.$vm, exp);
             }
             if (this.isEvent(attrName)) {
+                // 对于事件的处理
                 const dir = attrName.substring(1);
                 this.eventHandler(node, this.$vm, exp, dir);
             }
