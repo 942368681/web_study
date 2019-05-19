@@ -1,7 +1,7 @@
 # vue源码剖析
 
 ## vue工作机制
-== 通过 Object.defineProperty 设置 getter setter 用来实现 【响应式】与【依赖收集】 ==
+> 通过 Object.defineProperty 设置 getter setter 用来实现 【响应式】与【依赖收集】
 
 ### 流程图说明
 ![image](https://raw.githubusercontent.com/942368681/web_study/master/vue/vue-test-3/vue%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86%E5%85%B3%E7%B3%BB%E5%9B%BE%EF%BC%88%E5%8E%9F%EF%BC%89.png)
