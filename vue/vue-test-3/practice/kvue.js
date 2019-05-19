@@ -32,13 +32,13 @@ class KVue {
     /**
      * observe检测到data变化通知dep做视图更新
      */
-    observe (value) {
-        if (!value || typeof value !== 'object') {
+    observe (data) {
+        if (!data || typeof data !== 'object') {
             return;
         }
         // 遍历对象
-        Object.keys(value).forEach(key => {
-            this.defineReactive(value, key, value[key]);
+        Object.keys(data).forEach(key => {
+            this.defineReactive(data, key, data[key]);
             // 将此key代理到vue实例上，如果不代理，外部访问需要通过this.$data.xxx，代理之后外部访问变为this.xxx
             this.proxyData(key);
         });
@@ -55,11 +55,11 @@ class KVue {
         });
     };
 
-    defineReactive (obj, key, val) {
+    defineReactive (data, key, val) {
         // 给data中的每一层级的每个key创建一个Dep
         const dep = new Dep();
         // 给data中的每一层级的每个key都设置getter，setter，用来监听属性的变化
-        Object.defineProperty(obj, key, {
+        Object.defineProperty(data, key, {
             get () {
                 // 将Dep.target添加到dep中
                 Dep.target && dep.addDep(Dep.target);

@@ -32,3 +32,28 @@ compile作用：
 ## 手动实现简版vue核心
 
 ### 简化后流程图为根目录下 vue底层原理关系图（简）.png
+
+> 流程说明：初始化kvue实例，执行Observe，执行Compile，第一次把data中的属性更新到与之相关的视图中并且进行这个属性的依赖收集（new Watcher）
+
+> data双向绑定实现过程：遍历data中每个层级的每个属性，给每个属性创建一个Dependency，这个Dependency中有存放着一个或多个watcher，每个watcher代表着一个与视图有关的依赖，当kvue初始化挂载时，执行编译函数，将data中有关视图的依赖属性值更新到视图上时，再执行一个依赖收集的逻辑（new Watcher），这个逻辑会把当前这个watcher实例添加到这个属性的Dependency中（通过访问一次这个属性值调用get方法实现），以后每次更改这个data的属性值的时候，会调用这个属性的set方法，从而调用这个属性的Dependency的notify方法，从而遍历调用Dependency中的所有watcher的update方法，达到更新与这个属性相关的所有视图的目的。
+
+###### observe函数
+```
+对传入的data进行【响应化操作】和【做代理】，响应化操作也就是设置好属性的getter，setter并且为每个属性创建好其对应的Dependency
+observe => defineReactive / proxyData
+
+defineReactive：给data中的每一层级的每个key创建一个Dep && 给data中的每一层级的每个key都设置getter，setter，用来监听属性的变化
+proxyData：将此key代理到vue实例上，如果不代理，外部访问需要通过this.$data.xxx，代理之后外部访问变为this.xxx
+```
+
+###### getter
+```
+1. return val
+2. 为这个属性的Dependency添加watcher
+```
+
+###### setter
+```
+1. 赋值
+2. 调用与这个属性相关的所有watcher的更新方法：dep.notify() => this.deps.forEach(watcher => watcher.update()) => 更新Dom
+```
