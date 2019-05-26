@@ -25,6 +25,11 @@ function kFormCreate(Comp) {
       // 拿到这个name表单的校验规则
       const rules = this.options[field].rules;
       // some里面任何一项不通过就返回true跳出，取反表示校验失败
+      /**
+       * Javascript Array forEach()中无法return和break，代替方法some()与every()
+       * some()当内部return true时跳出整个循环
+       * every()当内部return false时跳出整个循环
+       */
       const isValid = !rules.some(rule => {
         if (rule.required) {
           if (!this.state[field]) {
