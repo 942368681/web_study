@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useReducer, useContext } from "react";
 
 function FruitList({ fruits, setFruit }) {
-  return fruits.map(f => (
-    <li key={f} onClick={() => setFruit(f)}>
+  return fruits.map((f, i) => (
+    <li key={f + i} onClick={() => setFruit(f)}>
       {f}
     </li>
   ));

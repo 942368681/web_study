@@ -1,13 +1,13 @@
 import React from "react";
 
-//高阶组件：扩展现有表单，提供控件包装、事件处理、表单校验
+// 高阶组件：扩展现有表单，提供控件包装、事件处理、表单校验
 function kFormCreate(Comp) {
   return class extends React.Component {
     constructor(props) {
       super(props);
-      // 选项
+      // 选项，收集所有的表单类型以及对应的校验规则
       this.options = {};
-      //   数据
+      // 数据
       this.state = {};
     }
 
@@ -22,12 +22,13 @@ function kFormCreate(Comp) {
     };
 
     validateField = field => {
+      // 拿到这个name表单的校验规则
       const rules = this.options[field].rules;
       // some里面任何一项不通过就返回true跳出，取反表示校验失败
       const isValid = !rules.some(rule => {
         if (rule.required) {
           if (!this.state[field]) {
-            //校验失败
+            // 校验失败
             this.setState({
               [field + "Message"]: rule.message
             });
@@ -43,14 +44,15 @@ function kFormCreate(Comp) {
           [field + "Message"]: ""
         });
       }
-
       return isValid;
     };
 
     validateFields = cb => {
+      // 遍历所有表单name，执行相应的校验规则，得到的是一个数组，里面是true/false
       const rets = Object.keys(this.options).map(field =>
         this.validateField(field)
       );
+      // 都为true表示表单整体校验通过，有一个false就代表不通过
       const ret = rets.every(v => v === true);
       cb(ret, this.state);
     };
