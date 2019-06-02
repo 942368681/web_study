@@ -2,7 +2,7 @@ import React, { useState, useEffect, useReducer, useContext } from "react";
 import { connect } from "react-redux";
 import { BrowserRouter, Link, Route, Redirect, Switch } from "react-router-dom";
 import { login } from "./store/user.redux";
-import { asyncFetch } from "./store/fruit.redux";
+import { asyncFetch, loadingStart } from "./store/fruit.redux";
 
 function FruitList({ fruits, setFruit }) {
   return (
@@ -100,7 +100,7 @@ const Login = connect(
   );
 });
 
-function HookTest({ fruits, loading, asyncFetch }) {
+function HookTest({ fruits, loading, asyncFetch,loadingStart }) {
   // useState参数是状态初始值
   // 返回一个数组，第一个元素是状态变量，第二个元素是状态变更函数
   const [fruit, setFruit] = useState("草莓");
@@ -113,7 +113,7 @@ function HookTest({ fruits, loading, asyncFetch }) {
     // dispatch({ type: "init", payload: ["草莓", "香蕉"]});
 
     asyncFetch(["草莓", "香蕉"]);
-    // loadingStart();
+    loadingStart();
     // setTimeout(() => {
     //   //   setFruits(["草莓", "香蕉"]);
     //   loadingEnd();
@@ -170,7 +170,8 @@ const mapStateToProps = state => ({
   loading: state.fruit.loading
 });
 const mapDispatchToProps = {
-  asyncFetch
+  asyncFetch,
+  loadingStart
 };
 
 export default connect(
