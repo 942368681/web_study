@@ -14,7 +14,8 @@ import CommentList from "./CommentList";
 import Composition from "./Composition";
 import ContextTest from "./ContextTest";
 import HookTest from "./HookTest";
-import HookTest1 from "./HookTest1";
+import HookTest01 from "./HookTest01";
+import HookTest02 from "./HookTest02";
 import AntdForm from "./AntdForm";
 import KFormTest from "./KFormTest";
 
@@ -39,10 +40,11 @@ class App extends Component {
         {/* 上下文 */}
         {/* <ContextTest /> */}
         {/* <HookTest /> */}
-        {/* <HookTest1 /> */}
+        {/* <HookTest01 /> */}
+        <HookTest02 />
         {/* 组件设计与实现 */}
         {/* <AntdForm /> */}
-        <KFormTest />
+        {/* <KFormTest /> */}
       </div>
     );
   }
