@@ -41,10 +41,10 @@ class App extends Component {
         {/* <ContextTest /> */}
         {/* <HookTest /> */}
         {/* <HookTest01 /> */}
-        <HookTest02 />
+        {/* <HookTest02 /> */}
         {/* 组件设计与实现 */}
         {/* <AntdForm /> */}
-        {/* <KFormTest /> */}
+        <KFormTest />
       </div>
     );
   }
