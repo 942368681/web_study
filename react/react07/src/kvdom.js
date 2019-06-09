@@ -1,4 +1,5 @@
 // 执行和vdom相关的操作
+// 根据传入的vdom，返回真实dom
 export function initVNode(vnode) {
   let { vtype } = vnode;
 
@@ -46,12 +47,14 @@ function createNativeElement(vnode) {
 
   return node;
 }
+
 function createFuncComp(vnode) {
   // 此处type是一个函数
   const { type, props } = vnode;
   const vdom = type(props);
   return initVNode(vdom);
 }
+
 function createClassComp(vnode) {
   // 此处type是一个class
   const { type, props } = vnode;

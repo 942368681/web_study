@@ -14,15 +14,14 @@ function createElement(type, props, ...children) {
     } else {
         // console.log(typeof type);
         if (type.isReactComponent) {
-            vtype = 3;
+            vtype = 3; // 类组件
         } else {
-            vtype = 2;
+            vtype = 2; // 函数组件
         }
     }
 
-
-    return {vtype, type, props}
-}
+    return {vtype, type, props};
+};
 
 
 export class Component {
@@ -30,9 +29,9 @@ export class Component {
     constructor(props) {
         this.props = props;
         this.state = {};
-    }
-    setState() {}
-    forceUpdate() {}
-}
+    };
+    setState() {};
+    forceUpdate() {};
+};
 
-export default {createElement}
+export default {createElement};
