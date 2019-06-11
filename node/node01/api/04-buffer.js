@@ -1,4 +1,4 @@
-const buf1 = Buffer.alloc(10)
+const buf1 = Buffer.alloc(10) // 分配一个10个字节的内存空间
 console.log(buf1)
 
 // 创建一个Buffer

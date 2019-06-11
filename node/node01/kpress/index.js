@@ -11,6 +11,6 @@ app.get('/user',(req,res) => {
 app.listen(3000,() => {
     console.log('Example app listen at 3000')
 })
-process.on('uncaughtException',err => {
-    console.log('22222',err)
-})
+// process.on('uncaughtException',err => {
+//     console.log('22222',err)
+// })

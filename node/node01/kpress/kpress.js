@@ -32,11 +32,11 @@ class Application extends EventEmitter {
                     return handler(req, res)
                 }
             }
-            process.on('uncaughtException', e=> {
-                console.log('Server Exception:',e)
-            })
         })
         server.listen(...arguments)
+        process.on('uncaughtException', e=> {
+            console.log('Server Exception:',e)
+        })
     }
 }
 module.exports = function createApplication() {
