@@ -20,6 +20,7 @@
         <button @click="changeName">呵呵</button>
         <div k-html="html"></div>
     </div>
+<<<<<<< HEAD
 </body>
 <script src='./kvue.js'></script>
 <script src='./compile.js'></script>
@@ -41,6 +42,30 @@
             changeName() {
                 this.name = 'hello world';
                 this.age = 1;
+=======
+    <script src="./kvue.js"></script>
+    <script src="./compile.js"></script>
+
+    <script>
+        const kaikeba = new KVue({
+            el: '#app',
+            data: {
+                name: "I am test.",
+                age: 12,
+                html: '<button>这是一个按钮</button>'
+            },
+            created() {
+                console.log('开始啦')
+                setTimeout(() => {
+                    this.name = '我是测试'
+                }, 1500)
+            },
+            methods: {
+                changeName() {
+                    this.name = '哈喽，开课吧'
+                    this.age = 1
+                }
+>>>>>>> 0e5af0818d0fae14cb386f0337dc11bb1fce7b07
             }
         }
     });
