@@ -20,44 +20,45 @@
         <button @click="changeName">呵呵</button>
         <div k-html="html"></div>
     </div>
-    <script src='./kvue.js'></script>
-    <script src='./compile.js'></script>
-
-    <script>
-        const kaikeba = new KVue({
-            el: '#app',
-            data: {
-                name: "I am test.",
-                age: 12,
-                html: '<button>这是一个按钮</button>'
-            },
-            created() {
-                console.log('开始啦')
-                setTimeout(() => {
-                    this.name = '我是测试'
-                }, 1500)
-            },
-            methods: {
-                changeName() {
-                    this.name = '哈喽，开课吧'
-                    this.age = 1
-                }
-            }
-        })
-    </script>
-    <!-- <script src="./kvue.js"></script>
-    <script>
-        const app = new KVue({
-            data: {
-                test: 'kaikeba',
-                foo: {bar:'bar'}
-            }
-        })
-
-        app.$data.test = '我变了'
-        app.$data.foo.bar = '我变了'
-        app.test = '我又变了'
-    </script> -->
 </body>
+<script src='./kvue.js'></script>
+<script src='./compile.js'></script>
+<script>
+    const kaikeba = new KVue({
+        el: '#app',
+        data: {
+            name: "I am test.",
+            age: 12,
+            html: '<button>这是一个按钮</button>'
+        },
+        created() {
+            console.log('开始啦');
+            setTimeout(() => {
+                this.name = '我是测试';
+            }, 1500);
+        },
+        methods: {
+            changeName() {
+                this.name = 'hello world';
+                this.age = 1;
+            }
+        }
+    });
+</script>
+<!-- <script>
+    const app = new KVue({
+        el: '#app',
+        data: {
+            test: 'kkk',
+            foo: {
+                bar: 'bar'
+            }
+        }
+    });
+
+    app.$data.test = '我变了';
+    app.$data.foo.bar = '我变了';
+    app.test = '我又变了';
+</script> -->
 
 </html>
