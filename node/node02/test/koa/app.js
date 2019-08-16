@@ -6,11 +6,13 @@ const app = new SKoa();
 //     res.end('my koa');
 // });
 
-app.use(ctx => {
+app.use(async (ctx, next) => {
     ctx.body = 'my koa';
+    await next();
+    ctx.body += "!!";
 });
-app.use(ctx => {
-    ctx.body = ctx.body + 'my koa';
+app.use(async ctx => {
+    ctx.body = ctx.body + ' my koa';
 });
 
 app.listen(3000);

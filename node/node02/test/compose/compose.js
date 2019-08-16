@@ -12,7 +12,7 @@
 //     return ret;
 // };
 
-// const fn = compose(add, square, square);
+// const fn = compose(add, square);
 
 // console.log(fn(1, 2));
 
@@ -26,7 +26,7 @@ function compose (middlewares) {
         function dispatch (i) {
             let fn = middlewares[i];
             if (!fn) {
-                return Promise.resolve()
+                return;
             }
             return Promise.resolve(
                 fn(function next () {
@@ -55,7 +55,7 @@ async function fn3 (next) {
 };
 
 function delay () {
-    return Promise.resolve(res => {
+    return new Promise(res => {
         setTimeout(() => {
             res();
         }, 2000);

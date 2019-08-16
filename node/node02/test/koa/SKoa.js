@@ -4,22 +4,31 @@ const request = require('./request');
 const response = require('./response');
 
 class SKoa {
+    constructor(){
+        this.middlewares = [];
+    }
+
     listen(...args) {
-        const server = http.createServer((req, res) => {
+        const server = http.createServer(async (req, res) => {
 
             // 创建上下文环境
             const ctx = this.createContext(req, res);
 
-            this.callback(ctx);
+            // 经过compose复合后的函数
+            const fn = this.compose(this.middlewares);
+            
+            // 执行fn， 相当于执行一遍所有中间件， 去处理ctx
+            await fn(ctx);
 
+            // 将处理好的ctx end一下
             res.end(ctx.body);
         });
 
         server.listen(...args);
     }
 
-    use(callback) {
-        this.callback = callback;
+    use(middleware) {
+        this.middlewares.push(middleware);
     }
 
     createContext(req, res) {
