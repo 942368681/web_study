@@ -36,6 +36,7 @@ class SKoa {
          * koa源码是这么做的，使用时不建议绕过koa的res，req对象而去直接使用原始node下的res，req对象
          * 这里ctx.request 和 ctx.response是封装过的对象
          * ctx.req 和 ctx.res是原始的node下的res，req对象
+         * 同时也说明了，ctx对request的API有直接引用的方式，比如可以通过ctx.url和ctx.request.url获取请求路径
          */
         const ctx = Object.create(context);
         ctx.request = Object.create(request);
