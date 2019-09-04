@@ -1,7 +1,7 @@
 (async () => {
     const Sequelize = require("sequelize");
     // 建立连接
-    const sequelize = new Sequelize("mysql-test-01", "root", "000000", {
+    const sequelize = new Sequelize("mysql_test_01", "root", "123456789", {
         host: "localhost",
         dialect: "mysql",
         /* 'mysql' | 'mariadb' | 'postgres' | 'mssql' 之一 */
