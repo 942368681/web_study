@@ -10,6 +10,11 @@
 
     // 定义模型
     const Fruit = sequelize.define("Fruit", {
+        id: {
+            type: Sequelize.DataTypes.UUID,
+            defaultValue: Sequelize.DataTypes.UUIDV1,
+            primaryKey: true
+        },
         name: {
             type: Sequelize.STRING(20),
             allowNull: false,
