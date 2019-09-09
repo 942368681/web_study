@@ -10,14 +10,17 @@ app.get("/", (req, res) => {
 
 app.get("/api/list", async (req, res) => {
     // 分页查询
-    const { page} = req.query
+    const { page, category, search } = req.query;
+    const categoryCondition = category ? {'category': category} : {}
     try {
         const col = mongo.col("fruits")
         const total = await col.find().count()
         const fruits = await col
-            .find()
-            .skip((page - 1) * 5)
-            .limit(5)
+            .find(
+                categoryCondition
+            )
+            .skip((page - 1) * 10)
+            .limit(10)
             .toArray()
         res.json({ ok: 1, data: { fruits, pagination: { total, page } } })
     } catch (error) {
