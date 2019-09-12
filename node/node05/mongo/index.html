@@ -18,7 +18,7 @@
         <el-input placeholder="请输入内容" v-model="search" class="input-with-select"  @change="changeHandler">
             <el-button slot="append" icon="el-icon-search"></el-button>
         </el-input>
-        <el-radio-group v-model="category" @change="getData">
+        <el-radio-group v-model="category" @change="changeCategory">
             <el-radio-button v-for="v in categorys" :label="v" :key="v">{{v}}</el-radio-button>
         </el-radio-group>
         <el-table :data="fruits" style="width: 100%">
@@ -29,7 +29,7 @@
             <el-table-column prop="category" label="种类">
             </el-table-column>
         </el-table>
-        <el-pagination layout="prev, pager, next" @current-change="currentChange" :total="total">
+        <el-pagination layout="prev, pager, next" :current-page="page" @current-change="currentChange" :total="total" :page-size="pageSize">
         </el-pagination>
     </div>
     <script>
@@ -41,7 +41,8 @@
                 fruits: [],
                 categorys: [],
                 category: [],
-                search:''
+                search:'',
+                pageSize: 10
             },
             created() {
                 this.getData()
@@ -59,7 +60,7 @@
                     await this.getData()
                 },
                 async getData() {
-                    const res = await axios.get(`/api/list?page=${this.page}&category=${this.category}&keyword=${this.search}`)
+                    const res = await axios.get(`/api/list?page=${this.page}&pageSize=${this.pageSize}&category=${this.category}&keyword=${this.search}`)
                     const data = res.data.data
                     this.fruits = data.fruits
                     this.total = data.pagination.total
@@ -68,6 +69,10 @@
                     const res = await axios.get(`/api/category`)
                     this.categorys = res.data.data
                     console.log('category', this.categorys)
+                },
+                changeCategory () {
+                    this.search = '';
+                    this.currentChange(1);
                 }
             }
         });
