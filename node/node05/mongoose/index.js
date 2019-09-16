@@ -2,7 +2,7 @@
 const mongoose = require("mongoose");
 
 // 1.连接
-mongoose.connect("mongodb://localhost:27017/test", { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost:27017/mongodb_test_02", { useNewUrlParser: true });
 
 const conn = mongoose.connection;
 conn.on("error", () => console.error("连接数据库失败"));
@@ -45,26 +45,26 @@ conn.once("open", async () => {
             date: { type: Date, default: Date.now }, // 指定默认值
             hidden: Boolean,
             meta: {
-              // 定义对象
-              votes: Number,
-              favs: Number
+                // 定义对象
+                votes: Number,
+                favs: Number
             }
-          })
-          // 静态方法
-          blogSchema.statics.findByAuthor = function(author) {
+        })
+        // 静态方法
+        blogSchema.statics.findByAuthor = function (author) {
             return this.model("blog")
                 .find({ author })
                 .exec();
-            };
+        };
 
-            // 虚拟属性
-            blogSchema.virtual("commentsCount").get(function() {
-                console.log('......length..')
-                return this.comments.length;
-            });
+        // 虚拟属性
+        blogSchema.virtual("commentsCount").get(function () {
+            console.log('......length..')
+            return this.comments.length;
+        });
 
 
-          const BlogModel = mongoose.model("blog", blogSchema);
+        const BlogModel = mongoose.model("blog", blogSchema);
         const blog = new BlogModel({
             title: "nodejs持久化",
             author: "jerry",
@@ -74,11 +74,11 @@ conn.once("open", async () => {
         console.log("新增blog", r)
 
         // 静态方法
-        r=await BlogModel.findByAuthor('jerry')
+        r = await BlogModel.findByAuthor('jerry')
         console.log("findByAuthor", r);
 
         // 虚拟属性
-        r = await BlogModel.findOne({author:'jerry'});
+        r = await BlogModel.findOne({ author: 'jerry' });
         console.log("blog留言数：", r.commentsCount);
 
     } catch (error) {
