@@ -55,9 +55,8 @@
                     await this.getData()
                 },
                 async changeHandler(val){
-                    console.log('search...',val)
                     this.search = val
-                    await this.getData()
+                    await this.currentChange(1);
                 },
                 async getData() {
                     const res = await axios.get(`/api/list?page=${this.page}&pageSize=${this.pageSize}&category=${this.category}&keyword=${this.search}`)
@@ -70,9 +69,9 @@
                     this.categorys = res.data.data
                     console.log('category', this.categorys)
                 },
-                changeCategory () {
+                async changeCategory () {
                     this.search = '';
-                    this.currentChange(1);
+                    await this.currentChange(1);
                 }
             }
         });
