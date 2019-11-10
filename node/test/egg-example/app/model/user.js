@@ -6,6 +6,6 @@ module.exports = app => {
         { timestamps: false }
     );
     // 数据库同步 
-    User.sync({force: true})
+    // User.sync({force: true});
     return User;
 };
